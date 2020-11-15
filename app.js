@@ -7,11 +7,32 @@ const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-let employeeArray = [];
+let employees = [];
 
 const render = require("./lib/htmlRenderer");
 
 function employee() {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        message: "What is the employee's role?",
+        name: "role",
+        choices: ["manager", "engineer", "intern"],
+      },
+    ])
+    .then((employee) => {
+      if (employee.role == "manager") {
+        manager();
+      } else if (employee.role == "engineer") {
+        engineer();
+      } else {
+        intern();
+      }
+    });
+    
+}
+function manager() {
   inquirer
     .prompt([
       {
@@ -30,115 +51,130 @@ function employee() {
         name: "email",
       },
       {
-        type: "list",
-        message: "What is the employee's role?",
-        name: "role",
-        choices: ["manager", "engineer", "intern"],
+        type: "input",
+        message: "What is the managers office number?",
+        name: "officeNumber",
       },
-    ])
-    .then((employee) => {
-      console.log(employee);
-      if (employee.role == manager) {
-        manager();
-      } else if (employee.role == engineer){
-          engineer();
-      } else{
-        intern();
-    }
- 
-    }); 
-}
-
-function manager() {
-    inquirer
-    .prompt([
-        {
-            type: "input",
-            message: "What is the managers office number?",
-            name: "officeNumber",
-          },
-          {
-            type: "list",
-            message: "do you want to add more employees",
-            name: addEmp,
-            choices: ["yes", "no"],
-          },
+      {
+        type: "list",
+        message: "do you want to add more employees",
+        name: "addEmp",
+        choices: ["yes", "no"],
+      },
     ])
 
     .then((manager) => {
-      let teamManager = new Manager(employee.name, employee.id, employee.email, manager.officeNumber);
-      employeeArray.push(teamManager);
+      let teamManager = new Manager(
+        manager.name,
+        manager.id,
+        manager.email,
+        manager.officeNumber
+      );
+      employees.push(teamManager);
       console.log(teamManager);
-      if (manager.addEmp == yes) {
+      if (manager.addEmp == "yes") {
         employee();
-      } 
-      else{
-        render(employeeArray);
-    } 
- 
+      } else {
+        render(manager);
+      }
     });
-
 }
 function engineer() {
   inquirer
-  .prompt([
+    .prompt([
       {
-          type: "input",
-          message: "What is the engineer's github username?",
-          name: "github",
-        },
-        {
-          type: "list",
-          message: "do you want to add more employees",
-          name: addEmp,
-          choices: ["yes", "no"],
-        },
-  ])
+        type: "input",
+        message: "What is the employee's name?",
+        name: "name",
+      },
+      {
+        type: "input",
+        message: "What is the employee's ID?",
+        name: "id",
+      },
+      {
+        type: "input",
+        message: "What is the employee's email?",
+        name: "email",
+      },
+      {
+        type: "input",
+        message: "What is the engineer's github username?",
+        name: "github",
+      },
+      {
+        type: "list",
+        message: "do you want to add more employees",
+        name: "addEmp",
+        choices: ["yes", "no"],
+      },
+    ])
 
-  .then((engineer) => {
-    let newEngineer = new Engineer(employee.name, employee.id, employee.email, engineer.github);
-    employeeArray.push(newEngineer);
-    console.log(newEngineer);
-    if (engineer.addEmp == yes) {
-      employee();
-    } 
-    else{
-      render(employeeArray);
-  } 
-
-  });
-
+    .then((engineer) => {
+      let newEngineer = new Engineer(
+        engineer.name,
+        engineer.id,
+        engineer.email,
+        engineer.github
+      );
+      employees.push(newEngineer);
+      console.log(newEngineer);
+      if (engineer.addEmp == "yes") {
+        employee();
+      } else {
+        render(engineer);
+      }
+    });
 }
 function intern() {
   inquirer
-  .prompt([
+    .prompt([
       {
-          type: "input",
-          message: "What is the intern's school name?",
-          name: "school",
-        },
-        {
-          type: "list",
-          message: "do you want to add more employees",
-          name: addEmp,
-          choices: ["yes", "no"],
-        },
-  ])
+        type: "input",
+        message: "What is the employee's name?",
+        name: "name",
+      },
+      {
+        type: "input",
+        message: "What is the employee's ID?",
+        name: "id",
+      },
+      {
+        type: "input",
+        message: "What is the employee's email?",
+        name: "email",
+      },
+      {
+        type: "input",
+        message: "What is the intern's school name?",
+        name: "school",
+      },
+      {
+        type: "list",
+        message: "do you want to add more employees",
+        name: "addEmp",
+        choices: ["yes", "no"],
+      },
+    ])
 
-  .then((intern) => {
-    let newIntern = new Intern(employee.name, employee.id, employee.email, intern.school);
-    employeeArray.push(newIntern);
-    console.log(newIntern);
-    if (intern.addEmp == yes) {
-      employee();
-    } 
-    else{
-      render(employeeArray);
-  } 
-
-  });
-
+    .then((intern) => {
+      let newIntern = new Intern(
+        intern.name,
+        intern.id,
+        intern.email,
+        intern.school
+      );
+      employees.push(newIntern);
+      console.log(newIntern);
+      if (intern.addEmp == "yes") {
+        employee();
+      } else {
+        render(intern);
+      }
+    });
 }
+
+
 employee();
 
 // Write code to use inquirer to gather information about the development team members,
