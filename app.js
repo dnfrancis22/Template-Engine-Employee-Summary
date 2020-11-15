@@ -43,19 +43,10 @@ function employee() {
       } else if (employee.role == engineer){
           engineer();
       } else{
-        Intern();
+        intern();
     }
-      //get data put into cards => via render fx
-      //whatever we pass has to be an array
-      //each item of the array has to be an instance of a class => object
-      //render(employees)
-      //string of html content
-      //write it to the file
-    }); //ask for name
-  //id
-  //email
-  //role
-  //based on their speicif roles,, you will call the speciifc get fx
+ 
+    }); 
 }
 
 function manager(manager) {
@@ -66,16 +57,27 @@ function manager(manager) {
             message: "What is the managers office number?",
             name: "officeNumber",
           },
+          {
+            type: "list",
+            message: "do you want to add more employees",
+            name: addEmp,
+            choices: ["yes", "no"],
+          },
     ])
-  console.log(manager);
-  //ask user for office number
-  //ask user if they are done
-  //then use the data to create an instance of the manager class
-  //push into an array (employeeArray)
-  //if done, what do we do?
-  //render html passing employeeArra
-  //if we are not done, what do we do? ask for more information
-  //call main fx
+
+    .then((manager) => {
+      let manager = (employee.name, employee.id, employee.email, manager.officeNumber);
+      employeeArray.push(manager);
+      console.log(manager);
+      if (manager.addEmp == yes) {
+        employee();
+      } 
+      else{
+        render();
+    } 
+ 
+    });
+
 }
 
 // Write code to use inquirer to gather information about the development team members,
