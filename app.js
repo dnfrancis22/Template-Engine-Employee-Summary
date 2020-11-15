@@ -49,7 +49,7 @@ function employee() {
     }); 
 }
 
-function manager(manager) {
+function manager() {
     inquirer
     .prompt([
         {
@@ -66,60 +66,121 @@ function manager(manager) {
     ])
 
     .then((manager) => {
-      let manager = (employee.name, employee.id, employee.email, manager.officeNumber);
-      employeeArray.push(manager);
-      console.log(manager);
+      let teamManager = new Manager(employee.name, employee.id, employee.email, manager.officeNumber);
+      employeeArray.push(teamManager);
+      console.log(teamManager);
       if (manager.addEmp == yes) {
         employee();
       } 
       else{
-        render();
+        render(employeeArray);
     } 
  
     });
 
 }
+function engineer() {
+  inquirer
+  .prompt([
+      {
+          type: "input",
+          message: "What is the engineer's github username?",
+          name: "github",
+        },
+        {
+          type: "list",
+          message: "do you want to add more employees",
+          name: addEmp,
+          choices: ["yes", "no"],
+        },
+  ])
+
+  .then((engineer) => {
+    let newEngineer = new Engineer(employee.name, employee.id, employee.email, engineer.github);
+    employeeArray.push(newEngineer);
+    console.log(newEngineer);
+    if (engineer.addEmp == yes) {
+      employee();
+    } 
+    else{
+      render(employeeArray);
+  } 
+
+  });
+
+}
+function intern() {
+  inquirer
+  .prompt([
+      {
+          type: "input",
+          message: "What is the intern's school name?",
+          name: "school",
+        },
+        {
+          type: "list",
+          message: "do you want to add more employees",
+          name: addEmp,
+          choices: ["yes", "no"],
+        },
+  ])
+
+  .then((intern) => {
+    let newIntern = new Intern(employee.name, employee.id, employee.email, intern.school);
+    employeeArray.push(newIntern);
+    console.log(newIntern);
+    if (intern.addEmp == yes) {
+      employee();
+    } 
+    else{
+      render(employeeArray);
+  } 
+
+  });
+
+}
+employee();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-inquirer.prompt([
-  {
-    type: "input",
-    message: "What is the employee's name?",
-    name: "name",
-  },
-  {
-    type: "input",
-    message: "What is the employee's ID?",
-    name: "id",
-  },
-  {
-    type: "input",
-    message: "What is the employee's email?",
-    name: "email",
-  },
-  {
-    type: "list",
-    message: "What is the employee's role?",
-    name: "role",
-    choices: ["Manager", "Engineer", "Intern"],
-  },
-  {
-    type: "input",
-    message: "What is the managers office number?",
-    name: "officeNumber",
-  },
-  {
-    type: "input",
-    message: "What is the engineers github username?",
-    name: "github",
-  },
-  {
-    type: "input",
-    message: "What is the intern's school name?",
-    name: "school",
-  },
-]);
+// inquirer.prompt([
+//   {
+//     type: "input",
+//     message: "What is the employee's name?",
+//     name: "name",
+//   },
+//   {
+//     type: "input",
+//     message: "What is the employee's ID?",
+//     name: "id",
+//   },
+//   {
+//     type: "input",
+//     message: "What is the employee's email?",
+//     name: "email",
+//   },
+//   {
+//     type: "list",
+//     message: "What is the employee's role?",
+//     name: "role",
+//     choices: ["Manager", "Engineer", "Intern"],
+//   },
+//   {
+//     type: "input",
+//     message: "What is the managers office number?",
+//     name: "officeNumber",
+//   },
+//   {
+//     type: "input",
+//     message: "What is the engineers github username?",
+//     name: "github",
+//   },
+//   {
+//     type: "input",
+//     message: "What is the intern's school name?",
+//     name: "school",
+//   },
+// ]);
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
