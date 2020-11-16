@@ -76,7 +76,8 @@ function manager() {
         employee();
       } else {
         render(employees);
-        fs.writeFile('output/team.html', outputPath, 'UTF8', (err) => {
+        console.log( render(employees))
+        fs.writeFile('output/team.html', ( render(employees)), 'UTF8', (err) => {
           if (err) throw err;
           console.log('The file has been created!');
         });
@@ -127,7 +128,7 @@ function engineer() {
         employee();
       } else {
         render(employees);
-        fs.writeFile('output/team.html', outputPath, 'UTF8', (err) => {
+        fs.writeFile('output/team.html', mainHtml, 'UTF8', (err) => {
           if (err) throw err;
           console.log('The file has been created!');
         });
@@ -178,16 +179,13 @@ function intern() {
         employee();
       } else {
         render(employees);
-        fs.writeFile('output/team.html', outputPath, 'UTF8', (err) => {
+        fs.writeFile('output/team.html', mainHtml, 'UTF8', (err) => {
           if (err) throw err;
           console.log('The file has been created!');
         });
       }
     });
 }
-
-
-
 
 employee();
 
