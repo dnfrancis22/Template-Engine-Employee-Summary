@@ -75,7 +75,7 @@ function manager() {
       if (manager.addEmp == "yes") {
         employee();
       } else {
-        render(manager);
+        render(employees);
       }
     });
 }
@@ -122,7 +122,7 @@ function engineer() {
       if (engineer.addEmp == "yes") {
         employee();
       } else {
-        render(engineer);
+        render(employees);
       }
     });
 }
@@ -169,7 +169,7 @@ function intern() {
       if (intern.addEmp == "yes") {
         employee();
       } else {
-        render(intern);
+        render(employees);
       }
     });
 }
@@ -180,43 +180,6 @@ employee();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 // inquirer.prompt([
-//   {
-//     type: "input",
-//     message: "What is the employee's name?",
-//     name: "name",
-//   },
-//   {
-//     type: "input",
-//     message: "What is the employee's ID?",
-//     name: "id",
-//   },
-//   {
-//     type: "input",
-//     message: "What is the employee's email?",
-//     name: "email",
-//   },
-//   {
-//     type: "list",
-//     message: "What is the employee's role?",
-//     name: "role",
-//     choices: ["Manager", "Engineer", "Intern"],
-//   },
-//   {
-//     type: "input",
-//     message: "What is the managers office number?",
-//     name: "officeNumber",
-//   },
-//   {
-//     type: "input",
-//     message: "What is the engineers github username?",
-//     name: "github",
-//   },
-//   {
-//     type: "input",
-//     message: "What is the intern's school name?",
-//     name: "school",
-//   },
-// ]);
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
