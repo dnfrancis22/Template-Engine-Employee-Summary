@@ -10,9 +10,17 @@ Clone the project from Github. In VS Code from the terminal run node app.js and 
 
 **Usage**
 
-When you run node app.js you are prompted answer questions about each employee. Their role, name, ID, and email. You will also be asked questions specific to each employee such as office number for manager, github for engineer and school for intern. When you have finished answering the questions for one employee, you will be asked if you want to add another employee. When you have finished adding all of you employees the app will create a html page containing cards for each employees and there information.
+When you run node app.js you are prompted answer questions about each employee. Their role, name, ID, and email. You will also be asked questions specific to each employee such as office number for manager, github for engineer and school for intern. 
 
-![rmgen](./assets/rmgen.png)
+![screen1](./assets/screen1.png)
+
+When you have finished answering the questions for one employee, you will be asked if you want to add another employee. 
+
+![screen2](./assets/screen2.png)
+
+When you have finished adding all of you employees the app will create a html page containing cards for each employees and there information.
+
+![screen3](./assets/screen3.png)
 
 **License**
 

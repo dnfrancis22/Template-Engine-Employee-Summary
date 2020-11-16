@@ -7,10 +7,11 @@ const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
+// Array for user data to be stored.
 let employees = [];
 
 const render = require("./lib/htmlRenderer");
-
+// function that starts the app. It prompts the user to enter the role of the employee. Then it will call the function related to the role that was chosen
 function employee() {
   inquirer
     .prompt([
@@ -21,6 +22,7 @@ function employee() {
         choices: ["manager", "engineer", "intern"],
       },
     ])
+    // Response from inquirer and conditionals to call the function related to the role that was chosen
     .then((employee) => {
       if (employee.role == "manager") {
         manager();
@@ -30,8 +32,8 @@ function employee() {
         intern();
       }
     });
-    
 }
+// function that prompts the user to ask questions based on the managers role.
 function manager() {
   inquirer
     .prompt([
@@ -62,7 +64,7 @@ function manager() {
         choices: ["yes", "no"],
       },
     ])
-
+    // Response from inquirer and conditionals to call the function related to he users choice.
     .then((manager) => {
       let teamManager = new Manager(
         manager.name,
@@ -70,20 +72,23 @@ function manager() {
         manager.email,
         manager.officeNumber
       );
+      // this pushes the data into the Array.
       employees.push(teamManager);
-      console.log(teamManager);
+      // conditional that calls the employee function if the answer to add another employee is yes.
       if (manager.addEmp == "yes") {
         employee();
       } else {
+        // this calls the htmlrenderer modual and passes the employees array through intern.
         render(employees);
-        console.log( render(employees))
-        fs.writeFile('output/team.html', ( render(employees)), 'UTF8', (err) => {
+        // this writes the newly created html to the team.html file.
+        fs.writeFile("output/team.html", render(employees), "UTF8", (err) => {
           if (err) throw err;
-          console.log('The file has been created!');
+          console.log("The file has been created!");
         });
       }
     });
 }
+// function that prompts the user to ask questions based on the engineers role.
 function engineer() {
   inquirer
     .prompt([
@@ -122,19 +127,24 @@ function engineer() {
         engineer.email,
         engineer.github
       );
+      // this pushes the data into the Array.
       employees.push(newEngineer);
       console.log(newEngineer);
+      // conditional that calls the employee function if the answer to add another employee is yes.
       if (engineer.addEmp == "yes") {
         employee();
       } else {
+        // this calls the htmlrenderer modual and passes the employees array through intern.
         render(employees);
-        fs.writeFile('output/team.html', mainHtml, 'UTF8', (err) => {
+        // this writes the newly created html to the team.html file.
+        fs.writeFile("output/team.html", render(employees), "UTF8", (err) => {
           if (err) throw err;
-          console.log('The file has been created!');
+          console.log("The file has been created!");
         });
       }
     });
 }
+// function that prompts the user to ask questions based on the interns role.
 function intern() {
   inquirer
     .prompt([
@@ -173,15 +183,19 @@ function intern() {
         intern.email,
         intern.school
       );
+      // this pushes the data into the Array.
       employees.push(newIntern);
       console.log(newIntern);
+      // conditional that calls the employee function if the answer to add another employee is yes.
       if (intern.addEmp == "yes") {
         employee();
       } else {
+        // this calls the htmlrenderer modual and passes the employees array through intern.
         render(employees);
-        fs.writeFile('output/team.html', mainHtml, 'UTF8', (err) => {
+        // this writes the newly created html to the team.html file.
+        fs.writeFile("output/team.html", render(employees), "UTF8", (err) => {
           if (err) throw err;
-          console.log('The file has been created!');
+          console.log("The file has been created!");
         });
       }
     });
