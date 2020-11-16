@@ -174,6 +174,11 @@ function intern() {
     });
 }
 
+fs.writeFile('output/team.html', outputPath, 'UTF8', (err) => {
+  if (err) throw err;
+  console.log('The file has been created!');
+});
+
 
 employee();
 
